@@ -5,25 +5,50 @@ import TaskList from './components/TaskList';
 import AddTask from './components/AddTask';
 
 function App() {
-  // State to manage login status and form toggle
+  // Track user authentication state
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
   const [showSignup, setShowSignup] = useState(false);
 
-  // Handle successful login (set isLoggedIn to true)
+  // Handle regular login (from the Login component)
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
 
-  // Handle logout (clear token and set isLoggedIn to false)
+  // Handle logging out
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
   };
 
+  // Handle demo account creation and login
+  const handleCreateDemo = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/users/demo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        // Store the token and log the user in
+        localStorage.setItem('token', data.token);
+        setIsLoggedIn(true);
+        alert(`Logged in as demo user: ${data.user.email}`);
+      } else {
+        alert('Failed to create demo account');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Error creating demo account');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
+      {/* If not logged in, show login/signup options and demo button */}
       {!isLoggedIn ? (
         <div className="w-full max-w-md mx-auto">
+          {/* Toggle between Login and Signup forms */}
           <button
             onClick={() => setShowSignup(!showSignup)}
             className="text-blue-500 hover:text-blue-700 mb-4"
@@ -35,9 +60,20 @@ function App() {
           ) : (
             <Login onLogin={handleLogin} />
           )}
+
+          {/* Add Demo Account button below the Login/Signup */}
+          <div className="mt-4">
+            <button
+              onClick={handleCreateDemo}
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+            >
+              Try Demo Account
+            </button>
+          </div>
         </div>
       ) : (
         <>
+          {/* If logged in, show the task list and logout option */}
           <button
             onClick={handleLogout}
             className="mb-4 text-red-500 hover:text-red-700"
