@@ -28,7 +28,6 @@ function App() {
       if (response.ok) {
         localStorage.setItem('token', data.token);
         setIsLoggedIn(true);
-        alert(`Logged in as demo user: ${data.user.email}`);
       } else {
         alert('Failed to create demo account');
       }
