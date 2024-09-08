@@ -43,17 +43,17 @@ function TaskList() {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-white p-6 mt-4 rounded-lg shadow-md">
+    <div className="w-full max-w-2xl mx-auto bg-white p-6 mt-4 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-gray-800">Your Tasks</h2>
       <div className="overflow-y-auto" style={{ maxHeight: '300px' }}>
-        <ul className="space-y-4">
+        <ul className="space-y-4 w-full">
           {tasks.length === 0 ? (
             <p className="text-gray-500">No tasks yet. Add a new one!</p>
           ) : (
             tasks.map((task) => (
               <li
                 key={task.id}
-                className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow hover:bg-gray-100 transition-colors"
+                className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow hover:bg-gray-100 transition-colors w-full flex-shrink-0"
               >
                 <span className="text-lg font-medium text-gray-900">{task.title}</span>
                 <button
