@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const prisma = require('../prismaClient');
 const router = express.Router();
 
+// Middleware to check authentication
 router.use((req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) return res.status(401).json({ error: 'Token required' });
@@ -25,6 +26,32 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     const tasks = await prisma.task.findMany({ where: { userId: req.userId } });
     res.json(tasks);
+});
+
+// Delete a task by id
+router.delete('/:id', async (req, res) => {
+    const taskId = parseInt(req.params.id); // Get task ID from request parameters
+
+    try {
+        // Check if the task exists and belongs to the current user
+        const task = await prisma.task.findUnique({
+            where: { id: taskId },
+        });
+
+        if (!task || task.userId !== req.userId) {
+            return res.status(404).json({ error: 'Task not found or unauthorized' });
+        }
+
+        // Delete the task
+        await prisma.task.delete({
+            where: { id: taskId },
+        });
+
+        res.status(204).send(); // 204 No Content, successful deletion with no response body
+    } catch (error) {
+        console.error('Error deleting task:', error);
+        res.status(500).json({ error: 'Failed to delete task' });
+    }
 });
 
 module.exports = router;

@@ -3,24 +3,25 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import TaskList from './components/TaskList';
 import AddTask from './components/AddTask';
+import './App.css'; // Keep if you have custom CSS styles
 
 function App() {
-  // Track user authentication state
+  // State for user authentication and sign-up form
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
   const [showSignup, setShowSignup] = useState(false);
 
-  // Handle regular login (from the Login component)
+  // Handle login action
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
 
-  // Handle logging out
+  // Handle logout action
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
   };
 
-  // Handle demo account creation and login
+  // Handle demo account creation
   const handleCreateDemo = async () => {
     try {
       const response = await fetch('http://localhost:4000/users/demo', {
@@ -28,9 +29,7 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
       });
       const data = await response.json();
-
       if (response.ok) {
-        // Store the token and log the user in
         localStorage.setItem('token', data.token);
         setIsLoggedIn(true);
         alert(`Logged in as demo user: ${data.user.email}`);
@@ -44,8 +43,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
-      {/* If not logged in, show login/signup options and demo button */}
+    <div className="min-h-screen flex flex-col items-center bg-gray-100">
       {!isLoggedIn ? (
         <div className="w-full max-w-md mx-auto">
           {/* Toggle between Login and Signup forms */}
@@ -60,8 +58,7 @@ function App() {
           ) : (
             <Login onLogin={handleLogin} />
           )}
-
-          {/* Add Demo Account button below the Login/Signup */}
+          {/* Demo account button */}
           <div className="mt-4">
             <button
               onClick={handleCreateDemo}
@@ -72,17 +69,16 @@ function App() {
           </div>
         </div>
       ) : (
-        <>
-          {/* If logged in, show the task list and logout option */}
+        <div className="flex flex-col w-full max-w-lg items-center justify-between min-h-screen">
+          <AddTask onTaskAdded={() => window.location.reload()} />
+          <TaskList />
           <button
             onClick={handleLogout}
-            className="mb-4 text-red-500 hover:text-red-700"
+            className="mt-8 mb-4 text-red-500 hover:text-red-700"
           >
             Logout
           </button>
-          <TaskList />
-          <AddTask onTaskAdded={() => window.location.reload()} />
-        </>
+        </div>
       )}
     </div>
   );
