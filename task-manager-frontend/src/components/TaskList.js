@@ -6,7 +6,7 @@ function TaskList() {
   useEffect(() => {
     const fetchTasks = async () => {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/tasks', {
+      const response = await fetch('http://localhost:4000/tasks', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
