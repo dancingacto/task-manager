@@ -3,7 +3,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import TaskList from './components/TaskList';
 import AddTask from './components/AddTask';
-import './App.css'; // Keep if you have custom CSS styles
+import './App.css'; // Include any custom styles if necessary
 
 function App() {
   // State for user authentication and sign-up form
@@ -43,43 +43,45 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-100">
-      {!isLoggedIn ? (
-        <div className="w-full max-w-md mx-auto">
-          {/* Toggle between Login and Signup forms */}
-          <button
-            onClick={() => setShowSignup(!showSignup)}
-            className="text-blue-500 hover:text-blue-700 mb-4"
-          >
-            {showSignup ? 'Already have an account? Log in' : 'Don’t have an account? Sign up'}
-          </button>
-          {showSignup ? (
-            <Signup onSignup={() => setShowSignup(false)} />
-          ) : (
-            <Login onLogin={handleLogin} />
-          )}
-          {/* Demo account button */}
-          <div className="mt-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-300 via-blue-200 to-pink-200">
+      <div className="w-full max-w-4xl p-8 bg-white rounded-3xl shadow-2xl">
+        {!isLoggedIn ? (
+          <div className="w-full max-w-md mx-auto">
+            {/* Toggle between Login and Signup forms */}
             <button
-              onClick={handleCreateDemo}
-              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+              onClick={() => setShowSignup(!showSignup)}
+              className="text-blue-500 hover:text-blue-700 mb-4"
             >
-              Try Demo Account
+              {showSignup ? 'Already have an account? Log in' : 'Don’t have an account? Sign up'}
+            </button>
+            {showSignup ? (
+              <Signup onSignup={() => setShowSignup(false)} />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )}
+            {/* Demo account button */}
+            <div className="mt-4">
+              <button
+                onClick={handleCreateDemo}
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+              >
+                Try Demo Account
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center space-y-8">
+            <AddTask onTaskAdded={() => window.location.reload()} />
+            <TaskList />
+            <button
+              onClick={handleLogout}
+              className="text-red-500 hover:text-red-700"
+            >
+              Logout
             </button>
           </div>
-        </div>
-      ) : (
-        <div className="flex flex-col w-full max-w-lg items-center justify-between min-h-screen">
-          <AddTask onTaskAdded={() => window.location.reload()} />
-          <TaskList />
-          <button
-            onClick={handleLogout}
-            className="mt-8 mb-4 text-red-500 hover:text-red-700"
-          >
-            Logout
-          </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

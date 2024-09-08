@@ -43,8 +43,8 @@ function TaskList() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-white p-6 mt-4 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Your Tasks</h2>
+    <div className="w-full max-w-2xl mx-auto bg-gradient-to-r from-blue-50 to-blue-100 p-6 mt-8 rounded-2xl shadow-2xl border border-gray-200">
+      <h2 className="text-3xl font-bold mb-6 text-gray-800">Your Tasks</h2>
       <div className="overflow-y-auto" style={{ maxHeight: '300px' }}>
         <ul className="space-y-4 w-full">
           {tasks.length === 0 ? (
@@ -53,7 +53,7 @@ function TaskList() {
             tasks.map((task) => (
               <li
                 key={task.id}
-                className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow hover:bg-gray-100 transition-colors w-full flex-shrink-0"
+                className="flex justify-between items-center bg-white p-4 rounded-lg shadow-lg hover:bg-gray-50 transition-colors w-full flex-shrink-0"
               >
                 <span className="text-lg font-medium text-gray-900">{task.title}</span>
                 <button
