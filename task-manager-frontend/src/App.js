@@ -23,7 +23,7 @@ function App() {
   // Handle demo account creation and login
   const handleCreateDemo = async () => {
     try {
-      const response = await fetch('http://localhost:3000/users/demo', {
+      const response = await fetch('http://localhost:4000/users/demo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
