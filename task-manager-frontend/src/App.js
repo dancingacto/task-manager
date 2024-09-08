@@ -6,22 +6,18 @@ import AddTask from './components/AddTask';
 import './App.css'; // Include any custom styles if necessary
 
 function App() {
-  // State for user authentication and sign-up form
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
-  const [showSignup, setShowSignup] = useState(false);
+  const [showSignup, setShowSignup] = useState(false); // Toggle between login and signup form
 
-  // Handle login action
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
 
-  // Handle logout action
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
   };
 
-  // Handle demo account creation
   const handleCreateDemo = async () => {
     try {
       const response = await fetch('http://localhost:4000/users/demo', {
@@ -47,27 +43,11 @@ function App() {
       <div className="w-full max-w-4xl p-8 bg-white rounded-3xl shadow-2xl">
         {!isLoggedIn ? (
           <div className="w-full max-w-md mx-auto">
-            {/* Toggle between Login and Signup forms */}
-            <button
-              onClick={() => setShowSignup(!showSignup)}
-              className="text-blue-500 hover:text-blue-700 mb-4"
-            >
-              {showSignup ? 'Already have an account? Log in' : 'Don’t have an account? Sign up'}
-            </button>
             {showSignup ? (
-              <Signup onSignup={() => setShowSignup(false)} />
+              <Signup onSignup={() => setShowSignup(false)} setShowSignup={setShowSignup} />
             ) : (
-              <Login onLogin={handleLogin} />
+              <Login onLogin={handleLogin} handleCreateDemo={handleCreateDemo} setShowSignup={setShowSignup} />
             )}
-            {/* Demo account button */}
-            <div className="mt-4">
-              <button
-                onClick={handleCreateDemo}
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
-              >
-                Try Demo Account
-              </button>
-            </div>
           </div>
         ) : (
           <div className="flex flex-col items-center space-y-8">
