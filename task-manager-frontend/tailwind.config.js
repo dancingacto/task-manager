@@ -1,9 +1,9 @@
 module.exports = {
   content: [
-    './src/**/*.{js,jsx,ts,tsx}', // Scans all JS, JSX, TS, and TSX files in the src/ directory
+    './src/**/*.{js,jsx,ts,tsx}',  // Scans all your source files
   ],
   theme: {
-    extend: {},  // Extend Tailwind's default theme if needed
+    extend: {},  // You can extend or customize the default Tailwind theme here
   },
   plugins: [],
 };
