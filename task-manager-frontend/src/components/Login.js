@@ -31,7 +31,7 @@ function Login({ onLogin, handleCreateDemo, setShowSignup }) {
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
       {/* Title and Subtitle */}
       <h1 className="text-4xl font-bold text-gray-900 mb-4 text-center">
-        Welcome back
+        Task Manager
       </h1>
       <p className="text-center text-gray-600 mb-6">
         New to this app?{" "}
