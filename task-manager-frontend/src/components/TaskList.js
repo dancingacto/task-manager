@@ -26,7 +26,7 @@ function TaskList() {
   const handleDelete = async (taskId) => {
     const token = localStorage.getItem('token');
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/${taskId}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/tasks/${taskId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
