@@ -7,7 +7,7 @@ function TaskList() {
   useEffect(() => {
     const fetchTasks = async () => {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:4000/tasks', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -26,7 +26,7 @@ function TaskList() {
   const handleDelete = async (taskId) => {
     const token = localStorage.getItem('token');
 
-    const response = await fetch(`http://localhost:4000/tasks/${taskId}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/${taskId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,

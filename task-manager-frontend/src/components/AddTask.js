@@ -7,7 +7,7 @@ function AddTask({ onTaskAdded }) {
     e.preventDefault();
 
     const token = localStorage.getItem('token');
-    const response = await fetch('http://localhost:4000/tasks', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
