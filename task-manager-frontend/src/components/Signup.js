@@ -16,7 +16,6 @@ function Signup({ onSignup, setShowSignup }) {
     });
 
     if (response.ok) {
-      const data = await response.json();
       onSignup(); // Call parent component to update state after sign-up
     } else {
       setError('Failed to create account');

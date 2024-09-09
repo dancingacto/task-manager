@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "postinstall": "cd task-manager-frontend && npm install && npm run build"
+    "postinstall": "cd task-manager-frontend && npm install && CI=false npm run build"
   },
   "keywords": [],
   "author": "",

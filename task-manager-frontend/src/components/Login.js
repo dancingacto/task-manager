@@ -1,42 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function Login({ onLogin, handleCreateDemo, setShowSignup }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/users/login`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      }
+    );
 
     if (response.ok) {
       const data = await response.json();
-      localStorage.setItem('token', data.token);
+      localStorage.setItem("token", data.token);
       onLogin(); // Call parent component to update login state
     } else {
-      setError('Invalid email or password');
+      setError("Invalid email or password");
     }
   };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
       {/* Title and Subtitle */}
-      <h1 className="text-4xl font-bold text-gray-900 mb-4 text-center">Welcome back</h1>
+      <h1 className="text-4xl font-bold text-gray-900 mb-4 text-center">
+        Welcome back
+      </h1>
       <p className="text-center text-gray-600 mb-6">
-        New to this app?{' '}
-        <a
-          href="#"
+        New to this app?{" "}
+        <button
           className="text-orange-500 hover:underline"
-          onClick={() => setShowSignup(true)} // Switch to signup form
+          onClick={() => setShowSignup(true)}
+          style={{
+            background: "none",
+            border: "none",
+            padding: 0,
+            color: "inherit",
+            textDecoration: "underline",
+            cursor: "pointer",
+          }}
         >
           Create an account.
-        </a>
+        </button>
       </p>
 
       {/* Error Message */}
