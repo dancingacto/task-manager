@@ -4,8 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build-frontend": "cd task-manager-frontend && npm install && npm run build",
-    "heroku-postbuild": "npm run build-frontend"
+    "heroku-postbuild": "cd task-manager-frontend && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
