@@ -22,6 +22,7 @@ router.post('/login', async (req, res) => {
 
     console.log('JWT Secret Key:', 'your_jwt_secret' === 'your_jwt_secret' ? 'Hardcoded Secret' : process.env.JWT_SECRET);
     
+
     const token = jwt.sign({ userId: user.id }, 'your_jwt_secret');
     res.json({ token });
 });
