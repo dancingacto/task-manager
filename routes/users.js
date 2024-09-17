@@ -20,7 +20,7 @@ router.post('/login', async (req, res) => {
         return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    console.log('JWT Secret Key:', 'your_jwt_secret' === 'your_jwt_secret' ? 'Hardcoded Secret' : process.env.JWT_SECRET);
+    console.log(`JWT Secret Key: ${process.env.JWT_SECRET}`);
     
 
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
