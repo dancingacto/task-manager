@@ -23,7 +23,7 @@ router.post('/login', async (req, res) => {
     console.log('JWT Secret Key:', 'your_jwt_secret' === 'your_jwt_secret' ? 'Hardcoded Secret' : process.env.JWT_SECRET);
     
 
-    const token = jwt.sign({ userId: user.id }, 'your_jwt_secret');
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
     res.json({ token });
 });
 
@@ -43,7 +43,7 @@ router.post('/demo', async (req, res) => {
       });
       
       // Generate JWT token for demo user
-      const token = jwt.sign({ userId: demoUser.id }, 'your_jwt_secret', { expiresIn: '1h' });
+      const token = jwt.sign({ userId: demoUser.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
       
       // Respond with token and user details
       res.status(201).json({
