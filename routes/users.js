@@ -19,6 +19,9 @@ router.post('/login', async (req, res) => {
     if (!user || !(await bcrypt.compare(password, user.password))) {
         return res.status(401).json({ error: 'Invalid email or password' });
     }
+
+    console.log('JWT Secret Key:', 'your_jwt_secret' === 'your_jwt_secret' ? 'Hardcoded Secret' : process.env.JWT_SECRET);
+    
     const token = jwt.sign({ userId: user.id }, 'your_jwt_secret');
     res.json({ token });
 });
