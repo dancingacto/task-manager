@@ -9,7 +9,7 @@ router.post('/signup', async (req, res) => {
     const { email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await prisma.user.create({ data: { email, password: hashedPassword } });
-    res.status(201).json(user);
+    res.status(201).json({ id: user.id, email: user.email});
 });
 
 // User login
