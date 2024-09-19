@@ -97,42 +97,44 @@ function TaskList() {
                   />
                 ) : (
                   // View mode
-                  <span className="text-lg font-medium text-gray-900">{task.title}</span>
+                  <span className="text-lg font-medium text-gray-900 flex-grow">{task.title}</span>
                 )}
-                
-                {editTaskId === task.id ? (
-                  // Save and Cancel buttons
-                  <>
-                    <button
-                      onClick={() => handleUpdate(task.id)}
-                      className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-transform transform hover:scale-105 focus:outline-none mr-2"
-                    >
-                      Save
-                    </button>
-                    <button
-                      onClick={() => setEditTaskId(null)}
-                      className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-transform transform hover:scale-105 focus:outline-none"
-                    >
-                      Cancel
-                    </button>
-                  </>
-                ) : (
-                  // Edit and Delete buttons
-                  <>
-                    <button
-                      onClick={() => handleEdit(task)}
-                      className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-transform transform hover:scale-105 focus:outline-none mr-2"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(task.id)}
-                      className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-transform transform hover:scale-105 focus:outline-none"
-                    >
-                      Delete
-                    </button>
-                  </>
-                )}
+
+                <div className="flex space-x-2">
+                  {editTaskId === task.id ? (
+                    // Save and Cancel buttons
+                    <>
+                      <button
+                        onClick={() => handleUpdate(task.id)}
+                        className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-transform transform hover:scale-105 focus:outline-none"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => setEditTaskId(null)}
+                        className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-transform transform hover:scale-105 focus:outline-none"
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    // Edit and Delete buttons
+                    <>
+                      <button
+                        onClick={() => handleEdit(task)}
+                        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-transform transform hover:scale-105 focus:outline-none"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(task.id)}
+                        className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-transform transform hover:scale-105 focus:outline-none"
+                      >
+                        Delete
+                      </button>
+                    </>
+                  )}
+                </div>
               </li>
             ))
           )}
