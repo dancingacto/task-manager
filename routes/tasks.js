@@ -54,4 +54,33 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+router.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    const { title, completed } = req.body;
+
+    try {
+        // Find the task and update it if it belongs to the logged-in user
+        const task = await prisma.task.updateMany({
+            where: {
+                id: parseInt(id),
+                userId: req.userId, // Ensure the task belongs to the user
+            },
+            data: {
+                title,
+                completed,
+            },
+        });
+
+        if (task.count === 0) {
+            return res.status(404).json({ error: 'Task not found or not authorized to update' });
+        }
+
+        res.json({ message: 'Task updated successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to update task' });
+    }
+});
+
+
 module.exports = router;
