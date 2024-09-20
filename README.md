@@ -4,6 +4,7 @@ This project is a simple Task Manager application designed to showcase backend d
 This project is deployed on [Railway](https://railway.app/).
 ## Live Demo
 ⮕[https://task-manager-production-14b8.up.railway.app/](https://task-manager-production-14b8.up.railway.app/)
+
 ![demo2](./images/demo2.png)
 ![demo1](./images/demo1.png)
 
