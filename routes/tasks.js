@@ -54,6 +54,7 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+// Update a task by id
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
     const { title, completed } = req.body;
