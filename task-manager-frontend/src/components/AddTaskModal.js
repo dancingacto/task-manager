@@ -1,11 +1,10 @@
-// src/components/AddTaskModal.js
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { STATUS_COLORS, PRIORITY_COLORS } from '../constants'; // Import color mappings
 
-Modal.setAppElement('#root'); // For accessibility
+// Set the app element to avoid screen reader accessibility issues
+Modal.setAppElement('#root');
 
 function AddTaskModal({ isOpen, onClose, onTaskAdded }) {
   const [title, setTitle] = useState('');
@@ -33,8 +32,8 @@ function AddTaskModal({ isOpen, onClose, onTaskAdded }) {
 
     if (response.ok) {
       const task = await response.json();
-      onTaskAdded(task);
-      setTitle('');
+      onTaskAdded(task);  // Call parent function to add the task
+      setTitle('');       // Clear the form fields
       setStatus('Not started');
       setPriority('Medium');
       setDueDate(null);
@@ -49,64 +48,76 @@ function AddTaskModal({ isOpen, onClose, onTaskAdded }) {
       className="modal-content"
       overlayClassName="modal-overlay"
     >
-      <h2 className="text-2xl font-bold mb-4">Add New Task</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <h2 className="text-2xl font-bold mb-6">New Task</h2>
+      <form onSubmit={handleSubmit}>
         {/* Task Title */}
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Task title"
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          required
-        />
+        <div className="mb-4 flex items-center space-x-4">
+          <label className="w-1/4 text-right text-gray-700">Title</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter task title"
+            className="w-3/4 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            required
+          />
+        </div>
 
         {/* Task Status */}
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none ${STATUS_COLORS[status]}`} // Apply background color
-        >
-          <option value="Not started">Not started</option>
-          <option value="Working on it">Working on it</option>
-          <option value="Stuck">Stuck</option>
-          <option value="Done">Done</option>
-        </select>
+        <div className="mb-4 flex items-center space-x-4">
+          <label className="w-1/4 text-right text-gray-700">Status</label>
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            className="w-3/4 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            <option value="Not started">Not started</option>
+            <option value="Working on it">Working on it</option>
+            <option value="Stuck">Stuck</option>
+            <option value="Done">Done</option>
+          </select>
+        </div>
+
+        {/* Task Due Date */}
+        <div className="mb-4 flex items-center space-x-4">
+          <label className="w-1/4 text-right text-gray-700">Due Date</label>
+          <DatePicker
+            selected={dueDate}
+            onChange={(date) => setDueDate(date)}
+            placeholderText="Select Due Date"
+            className="w-3/4 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
 
         {/* Task Priority */}
-        <select
-          value={priority}
-          onChange={(e) => setPriority(e.target.value)}
-          className={`w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none ${PRIORITY_COLORS[priority]}`} // Apply background color
-        >
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-          <option value="Critical">Critical</option>
-        </select>
-
-        {/* Due Date Picker */}
-        <DatePicker
-          selected={dueDate}
-          onChange={(date) => setDueDate(date)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-md"
-          placeholderText="Select Due Date"
-        />
-
-        {/* Submit and Cancel Buttons */}
-        <div className="flex justify-between">
-          <button
-            type="submit"
-            className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors"
+        <div className="mb-4 flex items-center space-x-4">
+          <label className="w-1/4 text-right text-gray-700">Priority</label>
+          <select
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+            className="w-3/4 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
-            Add Task
-          </button>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+            <option value="Critical">Critical</option>
+          </select>
+        </div>
+
+        {/* Footer Buttons */}
+        <div className="flex justify-between mt-6">
           <button
             type="button"
-            className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors"
             onClick={onClose}
+            className="text-gray-700 hover:text-gray-900 px-4 py-2"
           >
             Cancel
+          </button>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+          >
+            Create Task
           </button>
         </div>
       </form>
