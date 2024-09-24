@@ -1,13 +1,4 @@
-body {
-  font-family: 'Inter', sans-serif; /* Use a clean, modern font */
-}
-
-/* Button Styling */
-button {
-  transition: all 0.3s ease-in-out;
-}
-
-/* Modal Overlay Styling */
+/* Modal overlay (darker background) */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -15,70 +6,29 @@ button {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: 1000;
 }
 
+/* Modal content (white box in the center) */
 .modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 500px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000;
-}
-
-/* Input Styling */
-input,
-select {
-  border: 1px solid #d1d5db;
-  padding: 10px;
-  border-radius: 8px;
-  width: 100%;
-  margin-bottom: 15px;
-  transition: border-color 0.3s ease;
-}
-
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #3b82f6; /* Blue focus border */
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-}
-
-/* TaskCard Styling */
-.task-card {
+  background-color: white;
   padding: 20px;
-  background-color: #fff;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
 }
 
-.task-card h3 {
-  font-size: 1.2rem;
-  font-weight: 600;
+/* Button styles */
+button {
+  transition: all 0.3s ease;
 }
 
-.task-card button {
-  padding: 5px 10px;
-  background-color: #f87171; /* Light red */
-  color: white;
-  border-radius: 6px;
-  font-size: 0.875rem;
-}
-
-.task-card button:hover {
-  background-color: #ef4444; /* Darker red */
-}
-
-/* Misc */
-.shadow-md {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+button:hover {
+  opacity: 0.9;
 }
