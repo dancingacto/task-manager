@@ -58,16 +58,16 @@ function App() {
           </div>
         ) : (
           <div className="flex flex-col items-center space-y-8">
-            {/* Button to trigger modal for adding a task */}
+            {/* Only one button to trigger the modal */}
             <button
               onClick={() => setIsModalOpen(true)} // Open the modal
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+              className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 shadow-md transition-all"
             >
               Add New Task
             </button>
 
             {/* TaskList component */}
-            <TaskList />
+            <TaskList tasks={tasks} setTasks={setTasks} />
 
             {/* Modal for adding tasks */}
             <AddTaskModal
@@ -79,7 +79,7 @@ function App() {
             {/* Logout Button */}
             <button
               onClick={handleLogout}
-              className="text-red-500 hover:text-red-700"
+              className="mt-4 text-red-500 hover:text-red-700 underline"
             >
               Logout
             </button>
