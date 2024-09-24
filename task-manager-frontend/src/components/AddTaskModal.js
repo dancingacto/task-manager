@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { CalendarIcon, ClipboardCheckIcon, FlagIcon, TagIcon } from '@heroicons/react/outline'; // Import icons from Heroicons
 
 // Set the app element to avoid screen reader accessibility issues
 Modal.setAppElement('#root');
@@ -52,7 +53,8 @@ function AddTaskModal({ isOpen, onClose, onTaskAdded }) {
       <form onSubmit={handleSubmit}>
         {/* Task Title */}
         <div className="mb-4 flex items-center space-x-4">
-          <label className="w-1/4 text-right text-gray-700">Title</label>
+          <TagIcon className="w-6 h-6 text-gray-500" /> {/* Icon for title */}
+          <label className="w-1/4 text-gray-700">Title</label>
           <input
             type="text"
             value={title}
@@ -65,7 +67,8 @@ function AddTaskModal({ isOpen, onClose, onTaskAdded }) {
 
         {/* Task Status */}
         <div className="mb-4 flex items-center space-x-4">
-          <label className="w-1/4 text-right text-gray-700">Status</label>
+          <ClipboardCheckIcon className="w-6 h-6 text-gray-500" /> {/* Icon for status */}
+          <label className="w-1/4 text-gray-700">Status</label>
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value)}
@@ -80,7 +83,8 @@ function AddTaskModal({ isOpen, onClose, onTaskAdded }) {
 
         {/* Task Due Date */}
         <div className="mb-4 flex items-center space-x-4">
-          <label className="w-1/4 text-right text-gray-700">Due Date</label>
+          <CalendarIcon className="w-6 h-6 text-gray-500" /> {/* Icon for due date */}
+          <label className="w-1/4 text-gray-700">Due Date</label>
           <DatePicker
             selected={dueDate}
             onChange={(date) => setDueDate(date)}
@@ -91,7 +95,8 @@ function AddTaskModal({ isOpen, onClose, onTaskAdded }) {
 
         {/* Task Priority */}
         <div className="mb-4 flex items-center space-x-4">
-          <label className="w-1/4 text-right text-gray-700">Priority</label>
+          <FlagIcon className="w-6 h-6 text-gray-500" /> {/* Icon for priority */}
+          <label className="w-1/4 text-gray-700">Priority</label>
           <select
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
