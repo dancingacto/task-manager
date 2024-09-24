@@ -48,17 +48,7 @@ function TaskList() {
   return (
     <div className="w-full max-w-4xl mx-auto bg-white p-6 mt-8 rounded-lg shadow-lg">
       <h2 className="text-3xl font-bold mb-6 text-gray-800">Your Tasks</h2>
-
-      <button
-        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        onClick={() => setIsModalOpen(true)} // Open the modal
-      >
-        Add New Task
-      </button>
-
-      {/* Modal for Adding Task */}
-      <AddTaskModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onTaskAdded={handleTaskAdded} />
-
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {tasks.length === 0 ? (
           <p className="text-gray-500">No tasks yet. Add a new one!</p>
