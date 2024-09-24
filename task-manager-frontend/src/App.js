@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import TaskList from './components/TaskList';
-import AddTask from './components/AddTask';
+import AddTaskModal from './components/AddTaskModal'; // Import the modal
 import './App.css'; // Include any custom styles if necessary
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
   const [showSignup, setShowSignup] = useState(false); // Toggle between login and signup form
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [tasks, setTasks] = useState([]); // State to hold tasks
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -37,6 +39,12 @@ function App() {
     }
   };
 
+  // Handle adding a task
+  const handleTaskAdded = (newTask) => {
+    setTasks((prevTasks) => [...prevTasks, newTask]); // Add new task to the existing task list
+    setIsModalOpen(false); // Close the modal after task is added
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-300 via-blue-200 to-pink-200">
       <div className="w-full max-w-4xl p-8 bg-white rounded-3xl shadow-2xl">
@@ -50,8 +58,25 @@ function App() {
           </div>
         ) : (
           <div className="flex flex-col items-center space-y-8">
-            <AddTask onTaskAdded={() => window.location.reload()} />
+            {/* Button to trigger modal for adding a task */}
+            <button
+              onClick={() => setIsModalOpen(true)} // Open the modal
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            >
+              Add New Task
+            </button>
+
+            {/* TaskList component */}
             <TaskList />
+
+            {/* Modal for adding tasks */}
+            <AddTaskModal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)} // Close modal when needed
+              onTaskAdded={handleTaskAdded} // Callback for when a task is added
+            />
+
+            {/* Logout Button */}
             <button
               onClick={handleLogout}
               className="text-red-500 hover:text-red-700"
