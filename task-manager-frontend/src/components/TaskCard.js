@@ -40,7 +40,7 @@ function TaskCard({ task, onDelete, onEdit }) {
         )}
 
         {/* Action Buttons */}
-        <div className="flex justify-end space-x-4">
+        <div className="flex justify-between mt-6">
           <button
             onClick={() => onEdit(task)}
             className="text-blue-500 hover:text-blue-700 font-semibold"

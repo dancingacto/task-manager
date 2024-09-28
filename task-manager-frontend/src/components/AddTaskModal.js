@@ -78,17 +78,6 @@ function AddTaskModal({ isOpen, onClose, onTaskAdded }) {
           </select>
         </div>
 
-        {/* Task Due Date */}
-        <div className="mb-4 flex items-center space-x-4">
-          <label className="w-1/4 text-right text-gray-700">Due Date</label>
-          <DatePicker
-            selected={dueDate}
-            onChange={(date) => setDueDate(date)}
-            placeholderText="Select Due Date"
-            className="w-3/4 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
-
         {/* Task Priority */}
         <div className="mb-4 flex items-center space-x-4">
           <label className="w-1/4 text-right text-gray-700">Priority</label>
@@ -102,6 +91,17 @@ function AddTaskModal({ isOpen, onClose, onTaskAdded }) {
             <option value="High">High</option>
             <option value="Critical">Critical</option>
           </select>
+        </div>
+
+        {/* Task Due Date */}
+        <div className="mb-4 flex items-center space-x-4">
+          <label className="w-1/4 text-right text-gray-700">Due Date</label>
+          <DatePicker
+            selected={dueDate}
+            onChange={(date) => setDueDate(date)}
+            placeholderText="Select Due Date"
+            className="w-3/4 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
         </div>
 
         {/* Footer Buttons */}
