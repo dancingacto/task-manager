@@ -4,7 +4,6 @@ import { format } from 'date-fns';
 import { STATUS_COLORS, PRIORITY_COLORS } from '../constants';
 
 function TaskCard({ task, onDelete }) {
-<<<<<<< HEAD
   const formattedDate = task.dueDate
     ? format(new Date(task.dueDate), 'MMM dd, yyyy')
     : 'No due date';
@@ -17,17 +16,6 @@ function TaskCard({ task, onDelete }) {
         {/* Status */}
         <div className="flex items-center">
           <span className="text-gray-500 flex-shrink-0 w-40">Status:</span>
-=======
-  return (
-    <div className="bg-white shadow-lg rounded-lg p-4 mb-4 border border-gray-200">
-      <h3 className="text-xl font-bold mb-2">{task.title}</h3> {/* Title now has margin-bottom */}
-      
-      <div className="space-y-4"> {/* Stacking items vertically with space between them */}
-        {/* Task Owner (If applicable) */}
-        {/* Status */}
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-500">Status:</span>
->>>>>>> parent of 518a860 (align the entry names (labels like "Status",)
           <span
             className={`flex-grow text-right inline-block px-4 py-2 text-sm font-semibold rounded ${STATUS_COLORS[task.status]} text-white`}
           >
@@ -36,13 +24,8 @@ function TaskCard({ task, onDelete }) {
         </div>
 
         {/* Priority */}
-<<<<<<< HEAD
         <div className="flex items-center">
           <span className="text-gray-500 flex-shrink-0 w-40">Priority:</span>
-=======
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-500">Priority:</span>
->>>>>>> parent of 518a860 (align the entry names (labels like "Status",)
           <span
             className={`flex-grow text-right inline-block px-4 py-2 text-sm font-semibold rounded ${PRIORITY_COLORS[task.priority]} text-white`}
           >
@@ -52,17 +35,10 @@ function TaskCard({ task, onDelete }) {
 
         {/* Due Date */}
         {task.dueDate && (
-<<<<<<< HEAD
           <div className="flex items-center">
             <span className="text-gray-500 flex-shrink-0 w-40">Due Date:</span>
             <span className="flex-grow text-right inline-block px-4 py-2 text-sm bg-gray-300 text-black">
               {formattedDate}
-=======
-          <div className="flex items-center space-x-2">
-            <span className="text-gray-500">Due Date:</span>
-            <span className="text-sm text-gray-600">
-              {format(new Date(task.dueDate), 'MMM dd, yyyy')}
->>>>>>> parent of 518a860 (align the entry names (labels like "Status",)
             </span>
           </div>
         )}
