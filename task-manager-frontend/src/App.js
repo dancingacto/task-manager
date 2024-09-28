@@ -66,7 +66,7 @@ const handleTaskAdded = (newTask) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-300 via-blue-200 to-pink-200">
-      <div className="w-full max-w-4xl p-8 bg-white rounded-3xl shadow-2xl">
+      <div className="w-full max-w-4xl p-8 bg-violet-50 rounded-3xl shadow-2xl">
         {!isLoggedIn ? (
           <div className="w-full max-w-md mx-auto">
             {showSignup ? (
