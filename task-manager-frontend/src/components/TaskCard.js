@@ -7,11 +7,10 @@ function TaskCard({ task, onDelete }) {
   const formattedDate = task.dueDate ? format(new Date(task.dueDate), 'MMM dd, yyyy') : 'No due date';
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 mb-6 border border-gray-200 w-80"> {/* Increased size */}
-      <h3 className="text-2xl font-bold mb-4">{task.title}</h3> {/* Increased font size */}
+    <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200 w-full">
+      <h3 className="text-2xl font-bold mb-4">{task.title}</h3>
 
-      <div className="space-y-6"> {/* More vertical spacing */}
-        
+      <div className="space-y-6">
         {/* Status */}
         <div className="flex justify-between items-center">
           <span className="text-gray-500">Status:</span>
