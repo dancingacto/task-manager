@@ -1,8 +1,8 @@
 export const STATUS_COLORS = {
-    'Not started': 'bg-red-300',      // Red (Warm)
-    'Working on it': 'bg-orange-300', // Orange (Warm)
-    'Stuck': 'bg-yellow-400',         // Yellow (Warm)
-    'Done': 'bg-green-300',           // Green (Warm)
+    'Not started': 'bg-red-500',      // Red (Warm)
+    'Working on it': 'bg-orange-500', // Orange (Warm)
+    'Stuck': 'bg-yellow-500',         // Yellow (Warm)
+    'Done': 'bg-green-500',           // Green (Warm)
   };
   
   export const PRIORITY_COLORS = {
