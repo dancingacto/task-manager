@@ -7,16 +7,16 @@ function TaskCard({ task, onDelete }) {
   const formattedDate = task.dueDate ? format(new Date(task.dueDate), 'MMM dd, yyyy') : 'No due date';
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-4 mb-4 border border-gray-200">
-      <h3 className="text-xl font-bold mb-2">{task.title}</h3>
+    <div className="bg-white shadow-lg rounded-lg p-6 mb-6 border border-gray-200 w-96"> {/* Increased padding and width */}
+      <h3 className="text-2xl font-bold mb-4">{task.title}</h3> {/* Increased font size and margin */}
 
-      <div className="space-y-4"> {/* Stack entries vertically with space */}
+      <div className="space-y-6"> {/* More vertical spacing between entries */}
         
         {/* Status */}
         <div className="flex justify-between items-center">
           <span className="text-gray-500">Status:</span>
           <span
-            className={`inline-block w-24 px-3 py-1 text-sm font-semibold text-center rounded ${STATUS_COLORS[task.status]} text-white`}
+            className={`inline-block w-32 px-4 py-2 text-sm font-semibold text-center rounded ${STATUS_COLORS[task.status]} text-white`} {/* Increased width and padding */}
           >
             {task.status}
           </span>
@@ -26,7 +26,7 @@ function TaskCard({ task, onDelete }) {
         <div className="flex justify-between items-center">
           <span className="text-gray-500">Priority:</span>
           <span
-            className={`inline-block w-24 px-3 py-1 text-sm font-semibold text-center rounded ${PRIORITY_COLORS[task.priority]} text-white`}
+            className={`inline-block w-32 px-4 py-2 text-sm font-semibold text-center rounded ${PRIORITY_COLORS[task.priority]} text-white`} {/* Increased width and padding */}
           >
             {task.priority}
           </span>
@@ -36,14 +36,14 @@ function TaskCard({ task, onDelete }) {
         {task.dueDate && (
           <div className="flex justify-between items-center">
             <span className="text-gray-500">Due Date:</span>
-            <span className="inline-block w-24 px-3 py-1 text-sm text-center bg-gray-300 text-black">
+            <span className="inline-block w-32 px-4 py-2 text-sm font-semibold text-center rounded bg-gray-300 text-black"> {/* Increased width and padding */}
               {formattedDate}
             </span>
           </div>
         )}
 
         {/* Delete Button */}
-        <div className="flex justify-end">
+        <div className="flex justify-end mt-4"> {/* Added margin-top for better spacing */}
           <button
             onClick={() => onDelete(task.id)}
             className="text-red-500 hover:text-red-700 font-semibold"
