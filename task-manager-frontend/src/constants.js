@@ -6,7 +6,7 @@ export const STATUS_COLORS = {
   };
   
   export const PRIORITY_COLORS = {
-    'Critical': 'bg-blue-900',        // Dark Blue (Cold)
+    'Critical': 'bg-blue-950',        // Dark Blue (Cold)
     'High': 'bg-blue-700',            // Blue (Cold)
     'Medium': 'bg-blue-500',          // Lighter Blue (Cold)
     'Low': 'bg-blue-300',             // Very Light Blue (Cold)
