@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import TaskList from './components/TaskList';
@@ -39,11 +39,30 @@ function App() {
     }
   };
 
-  // Handle adding a task
-  const handleTaskAdded = (newTask) => {
-    setTasks((prevTasks) => [...prevTasks, newTask]); // Add new task to the existing task list
-    setIsModalOpen(false); // Close the modal after task is added
+// This effect will run only once when the component first mounts
+useEffect(() => {
+  const fetchTasks = async () => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/tasks`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setTasks(data);
+    } else {
+      console.error('Failed to fetch tasks');
+    }
   };
+
+  fetchTasks();
+}, []);
+
+// Handle adding a task
+const handleTaskAdded = (newTask) => {
+  setTasks((prevTasks) => [...prevTasks, newTask]); // Add new task to the existing task list
+  setIsModalOpen(false); // Close the modal after task is added
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-300 via-blue-200 to-pink-200">

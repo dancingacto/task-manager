@@ -1,28 +1,7 @@
-import React, { useState, useEffect } from 'react';
 import TaskCard from './TaskCard';
-import AddTaskModal from './AddTaskModal'; // Import the modal component
 
-function TaskList() {
-  const [tasks, setTasks] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control the modal
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/tasks`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setTasks(data);
-      } else {
-        console.error('Failed to fetch tasks');
-      }
-    };
-
-    fetchTasks();
-  }, []);
+function TaskList({ tasks, setTasks }) {
 
   // Handle task deletion
   const handleDelete = async (taskId) => {
@@ -39,11 +18,6 @@ function TaskList() {
     }
   };
 
-  // Handle adding a new task
-  const handleTaskAdded = (newTask) => {
-    setTasks([...tasks, newTask]); // Add new task to the list
-    setIsModalOpen(false); // Close the modal after adding the task
-  };
 
   return (
     <div className="w-full max-w-4xl mx-auto bg-white p-6 mt-8 rounded-lg shadow-lg">

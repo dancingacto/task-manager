@@ -17,9 +17,15 @@ router.use((req, res, next) => {
 
 // Create a task
 router.post('/', async (req, res) => {
-    const { title } = req.body;
-    const task = await prisma.task.create({ data: { title, userId: req.userId } });
-    res.status(201).json(task);
+    try {
+        const { title, status, priority, dueDate } = req.body;
+        const task = await prisma.task.create({ data: { title, status, priority, dueDate, userId: req.userId } });
+        res.status(201).json(task);
+    } catch (error) {
+        res.status(500).json({ error: `Failed to create ${title}`});
+        console.error('Error creating a task', error);
+    }
+
 });
 
 // Get all tasks for a user
@@ -57,7 +63,7 @@ router.delete('/:id', async (req, res) => {
 // Update a task by id
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { title, completed } = req.body;
+    const { title, status, priority, dueDate  } = req.body;
 
     try {
         // Find the task and update it if it belongs to the logged-in user
@@ -68,7 +74,9 @@ router.put('/:id', async (req, res) => {
             },
             data: {
                 title,
-                completed,
+                status,
+                priority, 
+                dueDate
             },
         });
 
