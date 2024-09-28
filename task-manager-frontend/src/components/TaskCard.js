@@ -6,7 +6,9 @@ import { STATUS_COLORS, PRIORITY_COLORS } from '../constants';
 function TaskCard({ task, onDelete, onEdit }) {
   return (
     <div className="bg-white shadow-lg rounded-lg p-4 mb-4 border border-gray-200">
-      <h3 className="text-xl font-bold mb-2">{task.title}</h3>
+      <div className="flex justify-center">
+        <h3 className="text-xl font-bold mb-2">{task.title}</h3>
+      </div>
 
       <div className="space-y-4">
         {/* Status */}
