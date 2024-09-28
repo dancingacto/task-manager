@@ -1,15 +1,14 @@
 // src/components/TaskCard.js
 import React from 'react';
 import { format } from 'date-fns';
-import { STATUS_COLORS, PRIORITY_COLORS } from '../constants'; // Import color mappings
+import { STATUS_COLORS, PRIORITY_COLORS } from '../constants';
 
-function TaskCard({ task, onDelete }) {
+function TaskCard({ task, onDelete, onEdit }) {
   return (
     <div className="bg-white shadow-lg rounded-lg p-4 mb-4 border border-gray-200">
       <h3 className="text-xl font-bold mb-2">{task.title}</h3>
 
-      <div className="space-y-4"> {/* Stack entries vertically with space */}
-        
+      <div className="space-y-4">
         {/* Status */}
         <div className="flex justify-between items-center">
           <span className="text-gray-500">Status:</span>
@@ -40,8 +39,14 @@ function TaskCard({ task, onDelete }) {
           </div>
         )}
 
-        {/* Delete Button */}
-        <div className="flex justify-end">
+        {/* Action Buttons */}
+        <div className="flex justify-end space-x-4">
+          <button
+            onClick={() => onEdit(task)}
+            className="text-blue-500 hover:text-blue-700 font-semibold"
+          >
+            Edit
+          </button>
           <button
             onClick={() => onDelete(task.id)}
             className="text-red-500 hover:text-red-700 font-semibold"

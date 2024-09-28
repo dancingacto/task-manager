@@ -87,7 +87,7 @@ router.put('/:id', async (req, res) => {
             return res.status(404).json({ error: 'Task not found or not authorized to update' });
         }
 
-        res.json({ message: 'Task updated successfully' });
+        res.json(task);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to update task' });

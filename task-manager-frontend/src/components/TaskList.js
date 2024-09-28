@@ -1,7 +1,7 @@
 import TaskCard from './TaskCard';
 
 
-function TaskList({ tasks, setTasks }) {
+function TaskList({ tasks, setTasks, onEdit }) {
 
   // Handle task deletion
   const handleDelete = async (taskId) => {
@@ -32,6 +32,7 @@ function TaskList({ tasks, setTasks }) {
               key={task.id}
               task={task}
               onDelete={handleDelete}
+              onEdit={onEdit}
             />
           ))
         )}

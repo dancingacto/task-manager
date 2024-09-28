@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import TaskList from './components/TaskList';
-import AddTaskModal from './components/AddTaskModal'; // Import the modal
+import AddTaskModal from './components/AddTaskModal'; 
+import EditTaskModal from './components/EditTaskModal';
 import './App.css'; // Include any custom styles if necessary
 
 function App() {
@@ -10,6 +11,8 @@ function App() {
   const [showSignup, setShowSignup] = useState(false); // Toggle between login and signup form
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const [tasks, setTasks] = useState([]); // State to hold tasks
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State to control edit modal visibility
+  const [taskToEdit, setTaskToEdit] = useState(null); // Task currently being edited
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -58,11 +61,25 @@ function App() {
     fetchTasks();
   }, []);
 
-// Handle adding a task
-const handleTaskAdded = (newTask) => {
-  setTasks((prevTasks) => [...prevTasks, newTask]); // Add new task to the existing task list
-  setIsModalOpen(false); // Close the modal after task is added
-};
+  // Handle adding a task
+  const handleTaskAdded = (newTask) => {
+    setTasks((prevTasks) => [...prevTasks, newTask]); // Add new task to the existing task list
+    setIsModalOpen(false); // Close the modal after task is added
+  };
+
+  const handleTaskUpdated = (updatedTask) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+    );
+    setIsEditModalOpen(false);
+    setTaskToEdit(null);
+  };
+
+  // Handle editing a task
+  const handleEdit = (task) => {
+    setTaskToEdit(task);
+    setIsEditModalOpen(true);
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-300 via-blue-200 to-pink-200">
@@ -72,27 +89,39 @@ const handleTaskAdded = (newTask) => {
             {showSignup ? (
               <Signup onSignup={() => setShowSignup(false)} setShowSignup={setShowSignup} />
             ) : (
-              <Login onLogin={handleLogin} handleCreateDemo={handleCreateDemo} setShowSignup={setShowSignup} />
+              <Login
+                onLogin={handleLogin}
+                handleCreateDemo={handleCreateDemo}
+                setShowSignup={setShowSignup}
+              />
             )}
           </div>
         ) : (
           <div className="flex flex-col items-center space-y-8">
-            {/* Only one button to trigger the modal */}
+            {/* Add Task Button */}
             <button
-              onClick={() => setIsModalOpen(true)} // Open the modal
+              onClick={() => setIsAddModalOpen(true)}
               className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 shadow-md transition-all"
             >
               Add New Task
             </button>
 
             {/* TaskList component */}
-            <TaskList tasks={tasks} setTasks={setTasks} />
+            <TaskList tasks={tasks} setTasks={setTasks} onEdit={handleEdit} />
 
             {/* Modal for adding tasks */}
             <AddTaskModal
-              isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)} // Close modal when needed
-              onTaskAdded={handleTaskAdded} // Callback for when a task is added
+              isOpen={isAddModalOpen}
+              onClose={() => setIsAddModalOpen(false)}
+              onTaskAdded={handleTaskAdded}
+            />
+
+            {/* Modal for editing tasks */}
+            <EditTaskModal
+              isOpen={isEditModalOpen}
+              onClose={() => setIsEditModalOpen(false)}
+              taskToEdit={taskToEdit}
+              onTaskUpdated={handleTaskUpdated}
             />
 
             {/* Logout Button */}
