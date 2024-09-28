@@ -1,17 +1,18 @@
+// src/App.js
 import React, { useState, useEffect } from 'react';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import TaskList from './components/TaskList';
-import AddTaskModal from './components/AddTaskModal'; 
-import EditTaskModal from './components/EditTaskModal';
-import './App.css'; // Include any custom styles if necessary
+import AddTaskModal from './components/AddTaskModal';
+import EditTaskModal from './components/EditTaskModal'; // Import the edit modal
+import './App.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
-  const [showSignup, setShowSignup] = useState(false); // Toggle between login and signup form
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const [tasks, setTasks] = useState([]); // State to hold tasks
+  const [showSignup, setShowSignup] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false); // State to control add modal visibility
   const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State to control edit modal visibility
+  const [tasks, setTasks] = useState([]);
   const [taskToEdit, setTaskToEdit] = useState(null); // Task currently being edited
 
   const handleLogin = () => {
@@ -42,7 +43,7 @@ function App() {
     }
   };
 
-  // This effect will run only once when the component first mounts
+  // Fetch tasks when the component mounts or when isLoggedIn changes
   useEffect(() => {
     const fetchTasks = async () => {
       const token = localStorage.getItem('token');
@@ -58,15 +59,18 @@ function App() {
       }
     };
 
-    fetchTasks();
-  }, []);
+    if (isLoggedIn) {
+      fetchTasks();
+    }
+  }, [isLoggedIn]);
 
   // Handle adding a task
   const handleTaskAdded = (newTask) => {
-    setTasks((prevTasks) => [...prevTasks, newTask]); // Add new task to the existing task list
-    setIsModalOpen(false); // Close the modal after task is added
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+    setIsAddModalOpen(false);
   };
 
+  // Handle updating a task
   const handleTaskUpdated = (updatedTask) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
