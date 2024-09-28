@@ -34,7 +34,7 @@ function TaskCard({ task, onDelete }) {
         {task.dueDate && (
           <div className="flex justify-between items-center">
             <span className="text-gray-500">Due Date:</span>
-            <span className="inline-block px-3 py-1 text-sm font-semibold rounded text-white min-w-[120px] text-center bg-slate-100">
+            <span className="inline-block px-3 py-1 text-sm font-semibold rounded text-white min-w-[120px] text-center bg-slate-400">
               {format(new Date(task.dueDate), 'MMM dd, yyyy')}
             </span>
           </div>
