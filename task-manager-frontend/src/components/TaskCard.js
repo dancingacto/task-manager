@@ -6,10 +6,42 @@ import { STATUS_COLORS, PRIORITY_COLORS } from '../constants'; // Import color m
 function TaskCard({ task, onDelete }) {
   return (
     <div className="bg-white shadow-lg rounded-lg p-4 mb-4 border border-gray-200">
-      <div className="flex justify-between items-center">
-        <h3 className="text-xl font-bold">{task.title}</h3>
-        <div className="flex space-x-2">
-          {/* Delete Button */}
+      <h3 className="text-xl font-bold mb-2">{task.title}</h3> {/* Title now has margin-bottom */}
+      
+      <div className="space-y-4"> {/* Stacking items vertically with space between them */}
+        {/* Task Owner (If applicable) */}
+        {/* Status */}
+        <div className="flex items-center space-x-2">
+          <span className="text-gray-500">Status:</span>
+          <span
+            className={`inline-block px-3 py-1 text-sm font-semibold rounded ${STATUS_COLORS[task.status]} text-white`}
+          >
+            {task.status}
+          </span>
+        </div>
+
+        {/* Priority */}
+        <div className="flex items-center space-x-2">
+          <span className="text-gray-500">Priority:</span>
+          <span
+            className={`inline-block px-3 py-1 text-sm font-semibold rounded ${PRIORITY_COLORS[task.priority]} text-white`}
+          >
+            {task.priority}
+          </span>
+        </div>
+
+        {/* Due Date */}
+        {task.dueDate && (
+          <div className="flex items-center space-x-2">
+            <span className="text-gray-500">Due Date:</span>
+            <span className="text-sm text-gray-600">
+              {format(new Date(task.dueDate), 'MMM dd, yyyy')}
+            </span>
+          </div>
+        )}
+
+        {/* Delete Button */}
+        <div className="flex justify-end">
           <button
             onClick={() => onDelete(task.id)}
             className="text-red-500 hover:text-red-700 font-semibold"
@@ -18,28 +50,6 @@ function TaskCard({ task, onDelete }) {
           </button>
         </div>
       </div>
-
-      <div className="mt-2 flex space-x-2">
-        {/* Task Status with Dynamic Color */}
-        <span
-          className={`inline-block px-3 py-1 text-sm font-semibold rounded ${STATUS_COLORS[task.status]} text-white`}
-        >
-          {task.status}
-        </span>
-
-        {/* Task Priority with Dynamic Color */}
-        <span
-          className={`inline-block px-3 py-1 text-sm font-semibold rounded ${PRIORITY_COLORS[task.priority]} text-white`}
-        >
-          {task.priority}
-        </span>
-      </div>
-
-      {task.dueDate && (
-        <div className="mt-2 text-sm text-gray-600">
-          Due Date: {format(new Date(task.dueDate), 'MMM dd, yyyy')}
-        </div>
-      )}
     </div>
   );
 }
