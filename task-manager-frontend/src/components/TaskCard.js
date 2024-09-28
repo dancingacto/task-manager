@@ -14,7 +14,7 @@ function TaskCard({ task, onDelete }) {
         <div className="flex justify-between items-center">
           <span className="text-gray-500">Status:</span>
           <span
-            className={`inline-block px-3 py-1 text-sm font-semibold rounded ${STATUS_COLORS[task.status]} text-white`}
+            className={`inline-block px-3 py-1 text-sm font-semibold rounded ${STATUS_COLORS[task.status]} text-white min-w-[100px] text-center`}
           >
             {task.status}
           </span>
@@ -24,7 +24,7 @@ function TaskCard({ task, onDelete }) {
         <div className="flex justify-between items-center">
           <span className="text-gray-500">Priority:</span>
           <span
-            className={`inline-block px-3 py-1 text-sm font-semibold rounded ${PRIORITY_COLORS[task.priority]} text-white`}
+            className={`inline-block px-3 py-1 text-sm font-semibold rounded ${PRIORITY_COLORS[task.priority]} text-white min-w-[100px] text-center`}
           >
             {task.priority}
           </span>
