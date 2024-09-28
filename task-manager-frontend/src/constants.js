@@ -9,5 +9,5 @@ export const STATUS_COLORS = {
     'Critical': 'bg-blue-400',        // Dark Blue (Cold)
     'High': 'bg-blue-300',            // Blue (Cold)
     'Medium': 'bg-blue-200',          // Lighter Blue (Cold)
-    'Low': 'bg-blue-100',             // Very Light Blue (Cold)
+    'Low': 'bg-blue-50',             // Very Light Blue (Cold)
   };
