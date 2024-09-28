@@ -1,7 +1,7 @@
 export const STATUS_COLORS = {
     'Not started': 'bg-red-300',      // Red (Warm)
     'Working on it': 'bg-orange-300', // Orange (Warm)
-    'Stuck': 'bg-yellow-300',         // Yellow (Warm)
+    'Stuck': 'bg-yellow-400',         // Yellow (Warm)
     'Done': 'bg-green-300',           // Green (Warm)
   };
   
