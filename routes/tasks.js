@@ -19,10 +19,13 @@ router.use((req, res, next) => {
 router.post('/', async (req, res) => {
     try {
         const { title, status, priority, dueDate } = req.body;
+        if (!title) {
+            res.status(400).json({error: 'Title is required'});
+        }
         const task = await prisma.task.create({ data: { title, status, priority, dueDate, userId: req.userId } });
         res.status(201).json(task);
     } catch (error) {
-        res.status(500).json({ error: `Failed to create ${title}`});
+        res.status(500).json({error: 'Failed to create task'});
         console.error('Error creating a task', error);
     }
 

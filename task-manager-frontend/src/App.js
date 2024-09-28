@@ -39,24 +39,24 @@ function App() {
     }
   };
 
-// This effect will run only once when the component first mounts
-useEffect(() => {
-  const fetchTasks = async () => {
-    const token = localStorage.getItem('token');
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/tasks`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+  // This effect will run only once when the component first mounts
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/tasks`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    if (response.ok) {
-      const data = await response.json();
-      setTasks(data);
-    } else {
-      console.error('Failed to fetch tasks');
-    }
-  };
+      if (response.ok) {
+        const data = await response.json();
+        setTasks(data);
+      } else {
+        console.error('Failed to fetch tasks');
+      }
+    };
 
-  fetchTasks();
-}, []);
+    fetchTasks();
+  }, []);
 
 // Handle adding a task
 const handleTaskAdded = (newTask) => {
