@@ -1,6 +1,6 @@
 # Task Manager Project
 
-This project is a simple Task Manager application designed to showcase backend development skills. The backend is built with Node.js, Express, PostgreSQL, and Prisma ORM. The project includes CRUD operations for tasks, along with setting task priorities, due dates, statuses, and JWT-based authentication. The frontend is built with React and Tailwind for clean and responsive interface
+This project is a simple Task Manager application designed to showcase backend development skills. The backend is built with Node.js, Express, PostgreSQL, and Prisma ORM. The project includes user authentication, CRUD operations for tasks, along with setting task priorities, due dates, statuses, and JWT-based authorization. The frontend is built with React and Tailwind for clean and responsive interface
 
 This project is deployed on [Railway](https://railway.app/).
 ## Live Demo
